@@ -12,7 +12,7 @@ class WelcomeController extends Controller {
 	| controllers, you are free to modify or remove it as you desire.
 	|
 	*/
-
+//testes
 	/**
 	 * Create a new controller instance.
 	 *
