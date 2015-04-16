@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceTable extends Migration {
+class CreateServicesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -15,7 +15,6 @@ class CreateServiceTable extends Migration {
 		Schema::create('services', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->primary('id');
 			$table->enum('priority', ['low','normal','high']);
 			$table->enum('type', ['service','repair','both']);
 			$table->enum('method', ['pickup','dropoff','onsite']);
@@ -33,7 +32,7 @@ class CreateServiceTable extends Migration {
 			//foreign keys
 			$table->integer('status')->unsigned();
 			$table->foreign('status')->references('id')->on('serviceStatuses');
-			$table->integer('createBy')->unsigned();
+			$table->integer('createdBy')->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();
 			$table->foreign('modifiedBy')->references('id')->on('users');

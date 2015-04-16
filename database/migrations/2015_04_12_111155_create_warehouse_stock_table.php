@@ -20,7 +20,7 @@ class CreateWarehouseStockTable extends Migration {
 			$table->timestamps();
 
 			//foreign keys
-			$table->integer('createBy')->unsigned();
+			$table->integer('createdBy')->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();
 			$table->foreign('modifiedBy')->references('id')->on('users');

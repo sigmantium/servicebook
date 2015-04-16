@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration {
 			$table->foreign('supplier')->references('id')->on('Suppliers');
 			$table->integer('type')->unsigned();
 			$table->foreign('type')->references('id')->on('itemTypes');
-			$table->integer('createBy')->unsigned();
+			$table->integer('createdBy')->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();
 			$table->foreign('modifiedBy')->references('id')->on('users');

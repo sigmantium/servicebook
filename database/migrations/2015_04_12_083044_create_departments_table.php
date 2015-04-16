@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartmentTable extends Migration {
+class CreateDepartmentsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -29,7 +29,7 @@ class CreateDepartmentTable extends Migration {
 			$table->string('state')->nullable();
 
 			//foreign keys
-			$table->integer('createBy')->unsigned();
+			$table->integer('createdBy')->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();
 			$table->foreign('modifiedBy')->references('id')->on('users');

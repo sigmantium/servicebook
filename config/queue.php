@@ -37,7 +37,7 @@ return [
 
 		'database' => [
 			'driver' => 'database',
-			'table' => 'jobs',
+			'table' => 'services',
 			'queue' => 'default',
 			'expire' => 60,
 		],
@@ -80,7 +80,7 @@ return [
 	|--------------------------------------------------------------------------
 	|
 	| These options configure the behavior of failed queue job logging so you
-	| can control which database and table are used to store the jobs that
+	| can control which database and table are used to store the services that
 	| have failed. You may change them to any database / table you wish.
 	|
 	*/
