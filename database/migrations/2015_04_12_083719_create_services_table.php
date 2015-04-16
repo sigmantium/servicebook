@@ -21,10 +21,10 @@ class CreateServiceTable extends Migration {
 			$table->enum('method', ['pickup','dropoff','onsite']);
 			$table->boolean('disposal');
 			$table->date('date');
-			$table->time('due');
 			$table->timestamps();
 
 			//nullables
+			$table->time('due')->nullable();
 			$table->text('serviceNotes')->nullable();
 			$table->text('invoiceNotes')->nullable();
 			$table->text('orderNumber')->nullable();
