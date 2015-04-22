@@ -13,9 +13,23 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
-Route::get('services/create', 'ServicesController@create');
-Route::get('companies/create', 'CompaniesController@create');
-Route::get('contacts/create', 'ContactsController@create');
+Route::get('top', 'HomeController@topMenu');
+Route::get('right', 'HomeController@rightMenu');
+
+/*Service Routes*/
+Route::resource('services', 'ServicesController');
+
+/*Company Routes*/
+Route::resource('companies', 'CompaniesController');
+
+/*Contact Routes*/
+Route::resource('contacts', 'ContactsController');
+
+/*Vehicle Routes*/
+Route::resource('vehicles', 'VehiclesController');
+Route::get('vehicles/createMake', 'VehiclesController@createMake');
+Route::get('vehicles/createModel', 'VehiclesController@createModel');
+Route::get('vehicles/vehicleMakes', 'VehiclesController@vehicleMakes');
 
 
 Route::controllers([

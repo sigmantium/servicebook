@@ -179,6 +179,12 @@ input[type="search"] {
   input[type="month"] {
     line-height: @input-height-base;
   }
+  input[type="date"].input-xs,
+  input[type="time"].input-xs,
+  input[type="datetime-local"].input-xs,
+  input[type="month"].input-xs {
+    line-height: @input-height-xs;
+  }
   input[type="date"].input-sm,
   input[type="time"].input-sm,
   input[type="datetime-local"].input-sm,
@@ -540,6 +546,13 @@ input[type="checkbox"] {
     @media (min-width: @screen-sm-min) {
       .control-label {
         padding-top: (@padding-small-vertical + 1);
+      }
+    }
+  }
+  .form-group-xs {
+    @media (min-width: @screen-xs-min) {
+      .control-label {
+        padding-top: (@padding-xs-vertical + 1);
       }
     }
   }

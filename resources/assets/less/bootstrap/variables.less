@@ -51,6 +51,7 @@
 @font-size-base:          14px;
 @font-size-large:         ceil((@font-size-base * 1.25)); // ~18px
 @font-size-small:         ceil((@font-size-base * 0.85)); // ~12px
+@font-size-xs:            ceil((@font-size-base * 0.71)); // ~12px
 
 @font-size-h1:            floor((@font-size-base * 2.6)); // ~36px
 @font-size-h2:            floor((@font-size-base * 2.15)); // ~30px
@@ -101,10 +102,12 @@
 
 @line-height-large:         1.33;
 @line-height-small:         1.5;
+@line-height-xs:            1.5;
 
 @border-radius-base:        4px;
 @border-radius-large:       6px;
 @border-radius-small:       3px;
+@border-radius-xs:          1px;
 
 //** Global color for active items (e.g., navs or dropdowns).
 @component-active-color:    #fff;
@@ -192,6 +195,8 @@
 @input-border-radius-large:      @border-radius-large;
 //** Small `.form-control` border radius
 @input-border-radius-small:      @border-radius-small;
+//** Extra Small `.form-control` border radius
+@input-border-radius-xs:      @border-radius-xs;
 
 //** Border color for inputs on focus
 @input-border-focus:             #66afe9;
@@ -205,6 +210,8 @@
 @input-height-large:             (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2);
 //** Small `.form-control` height
 @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
+//** Extra Small `.form-control` height
+@input-height-xs:             (floor(@font-size-xs * @line-height-xs) + (@padding-xs-vertical * 2) + 2);
 
 @legend-color:                   @gray-dark;
 @legend-border-color:            #e5e5e5;
@@ -408,7 +415,7 @@
 //
 //##
 
-//=== Shared nav styles
+//=== Shared partials styles
 @nav-link-padding:                          10px 15px;
 @nav-link-hover-bg:                         @gray-lighter;
 
@@ -762,9 +769,9 @@
 @badge-link-hover-color:      #fff;
 @badge-bg:                    @gray-light;
 
-//** Badge text color in active nav link
+//** Badge text color in active partials link
 @badge-active-color:          @link-color;
-//** Badge background color in active nav link
+//** Badge background color in active partials link
 @badge-active-bg:             #fff;
 
 @badge-font-weight:           bold;
