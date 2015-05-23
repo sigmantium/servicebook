@@ -7,13 +7,11 @@
 	<title>ServiceBook</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="//codeorigin.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="//codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+	<link href="{{ asset('/css/all.css') }}" rel="stylesheet">
+	<script src="{{ asset('js/all.js') }}"></script>
+	<script src="{{ asset('js/raphael-min.js') }}"></script>
+	<script src="{{ asset('js/morris.min.js') }}"></script>
+	<script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -27,15 +25,13 @@
 </head>
 <body style="padding-top:50px">
 @include('partials.top')
-@include('partials.left')
+@if (Auth::user())
+	@include('partials.left')
+@endif
 @yield('breadcrumb')
-@yield('warning')
+@yield('error')
+@include('flash::message')
 @yield('content')
 
-
-
-	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

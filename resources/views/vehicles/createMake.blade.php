@@ -8,7 +8,7 @@
                     <div class="panel-heading">New Vehicle Make</div>
 
                     <div class="panel-body">
-                        {!! Form::open() !!}
+                        {!! Form::open(['url' => 'vehicles/vehicleMakes']) !!}
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group input-group-xs">
@@ -29,3 +29,5 @@
         </div>
     </div>
 @endsection
+
+@include('errors.formErrors')

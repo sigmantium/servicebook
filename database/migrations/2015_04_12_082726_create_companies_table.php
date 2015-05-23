@@ -16,18 +16,19 @@ class CreateCompaniesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->boolean('enabled');
+			$table->boolean('enabled')->default(0);
 			$table->timestamps();
 			
 			//Nullables
 			$table->text('notes')->nullable();
+			$table->boolean('account')->default(0)->nullable();
 
 			//foreign keys
 			$table->integer('createdBy')->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();
 			$table->foreign('modifiedBy')->references('id')->on('users');
-			$table->integer('primaryDepartment')->unsigned();
+			$table->integer('primaryDepartment')->unsigned()->nullable();
 			$table->foreign('primaryDepartment')->references('id')->on('departments');
 		});
 	}

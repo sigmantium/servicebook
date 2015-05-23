@@ -1,5 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Request;
+
+use App\DailyNote;
+use Auth;
+
 class HomeController extends Controller {
 
 	/*
@@ -30,7 +37,31 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+
 		return view('home');
 	}
 
+	public function storeNote()
+	{
+		$currentPage = Request::only('currentPage');
+
+		$note = new DailyNote(Request::Except('currentPage'));
+		$note->createdBy = Auth::user()->id;
+		$note->modifiedBy = Auth::user()->id;
+		$note->save();
+		return redirect($currentPage['currentPage']);
+	}
+
+	public function completeNote($id)
+	{
+		$note = DailyNote::findOrFail($id);
+		$note->completed = true;
+		$note->save();
+	}
+
+
+	public function viewNote($id)
+	{
+		Auth::user()->notes()->attach($id);
+	}
 }

@@ -16,7 +16,7 @@
 					<h3 class="panel-title">Todays Bookings</h3>
 				</div>
 				<div class="panel-body">
-					<div class="table-responsive">
+					<div class="table-responsive"><!-- Todays Bookings -->
 						<table class="table table-bordered table-hover table-striped">
 							<thead>
 							<tr>
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 			</div>
-		</div> <!-- Todays Bookings -->
+		</div> <!-- Active Jobs Donut -->
 		<div class="col-lg-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -96,7 +96,7 @@
 					</div>
 				</div>
 			</div>
-		</div> <!-- Active Jobs Donut -->
+		</div>
 		<div class="col-lg-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -161,23 +161,4 @@
 
 		});
 	</script>
-@endsection
-
-@section('warning')
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="alert alert-warning alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<strong>Warning!</strong> {{ Auth::user()->name }} is already accessing this page!
-			</div>
-		</div>
-	</div>
-@endsection
-
-@section('breadcrumb')
-	<ol class="breadcrumb">
-		<li><a href="#">Home</a></li>
-		<li><a href="#">Library</a></li>
-		<li class="active">Data</li>
-	</ol>
 @endsection

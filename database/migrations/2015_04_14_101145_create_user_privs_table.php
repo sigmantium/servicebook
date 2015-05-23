@@ -14,7 +14,6 @@ class CreateUserPrivsTable extends Migration {
 	{
 		Schema::create('userPrivs', function(Blueprint $table)
 		{
-			$table->increments('id');
 			$table->timestamps();
 
 			//foreign keys

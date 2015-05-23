@@ -7,16 +7,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">ServiceBook</a>
+            <a class="navbar-brand" href="/">ServiceBook</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             @if (Auth::user())
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" role="tablist">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">New<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{action('ServicesController@create')}}">Booking</a></li>
-                            <li><a href="{{action('CompaniesController@create')}}">Company</a></li>
                             <li><a href="{{action('ContactsController@create')}}">Contact</a></li>
                         </ul>
                     </li>
@@ -34,11 +33,36 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="dropdown-submenu"><a href="#">Vehicles</a></li>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Vehicle Makes</a></li>
-                                    <li><a href="#">Vehicle Models</a></li>
+                            <li class="dropdown-submenu dropdown">
+                                <a href="cusLabel" class="dropdown-toggle" data-toggle="dropdown" role="button" id="cusLabel" aria-expanded="false">Customers <i class="glyphicon glyphicon-chevron-right"></i></a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="cusLabel">
+                                    <li role="presentation"><a href="{{action('CompaniesController@index')}}" role="menuitem">Companies</a></li>
+                                    <li role="presentation"><a href="{{action('DepartmentsController@index')}}" role="menuitem">Departments</a></li>
+                                    <li role="presentation"><a href="{{action('ContactsController@index')}}" role="menuitem">Contacts</a></li>
+                                    <li role="presentation"><a href="{{action('FleetsController@index')}}" role="menuitem">Fleets</a></li>
                                 </ul>
+                            </li>
+                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vehicles <i class="glyphicon glyphicon-chevron-right"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a tabindex="-1" href="{{action("VehiclesController@vehicleMakes")}}">Vehicle Makes</a></li>
+                                    <li><a href="{{action("VehiclesController@vehicleModels")}}">Vehicle Models</a></li>
+                                    <li><a href="{{action("VehiclesController@scheduleKMs")}}">Schedule KMs</a></li>
+                                    <li><a href="{{action("VehiclesController@scheduleTimes")}}">Schedule Times</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Inventory <i class="glyphicon glyphicon-chevron-right"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a tabindex="-1" href="{{action("InventoryController@itemTypes")}}">Item Types</a></li>
+                                    <li><a href="{{action("WarehousesController@index")}}">Warehouses</a></li>
+                                    <li><a href="#">Stock Control</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Service <i class="glyphicon glyphicon-chevron-right"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a tabindex="-1" href="{{action("ServicesController@serviceStatuses")}}">Service Statuses</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu"><a href="{{action("UsersController@index")}}">Users</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -65,3 +89,15 @@
         </div>
     </div>
 </nav>
+<script>
+    $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+        // Avoid following the href location when clicking
+        event.preventDefault();
+        // Avoid having the menu to close when clicking
+        event.stopPropagation();
+        // If a menu is already open we close it
+        $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+        // opening the one you clicked on
+        $(this).parent().addClass('open');
+    });
+</script>

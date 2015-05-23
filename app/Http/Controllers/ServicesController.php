@@ -1,11 +1,28 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\Service\ServiceStatusRequest;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\VehicleMake;
+use App\VehicleModel;
+use App\ServiceStatus;
+
+use Auth;
 
 class ServicesController extends Controller {
+
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 
 	/**
 	 * Display a listing of the resource.
@@ -24,7 +41,8 @@ class ServicesController extends Controller {
 	 */
 	public function create()
 	{
-		return view('services.create');
+		$makes = VehicleMake::orderBy('name')->lists('name', 'id');
+		return view('services.create')->with('makes', $makes);
 	}
 
 	/**
@@ -81,4 +99,27 @@ class ServicesController extends Controller {
 		//
 	}
 
+
+
+	public function createServiceStatus()
+	{
+		return view('services.createServiceStatus');
+	}
+
+	public function storeServiceStatus(ServiceStatusRequest $request)
+	{
+		$schedule = new ServiceStatus($request->all());
+		$schedule->createdBy = Auth::user()->id;
+		$schedule->save();
+
+		return redirect('services/serviceStatuses');
+
+	}
+
+	public function serviceStatuses()
+	{
+		$statuses = ServiceStatus::orderBy('status', 'asc')->lists('status');
+		return view('services.servicestatuses')->with('statuses', $statuses);
+
+	}
 }

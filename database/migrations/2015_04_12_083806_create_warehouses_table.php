@@ -16,6 +16,8 @@ class CreateWarehousesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->text('address')->nullable();
+			$table->boolean('enabled')->nullable()->default(1);
 			$table->integer('createdBy')->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();

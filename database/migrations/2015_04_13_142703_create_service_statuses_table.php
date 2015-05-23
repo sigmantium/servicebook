@@ -18,6 +18,7 @@ class CreateServiceStatusesTable extends Migration {
 			// OPTIONS ['booking','new','started','on hold','off site','completed','invoiced','paid']
 			$table->string('status');
 			$table->timestamps();
+
 		});
 	}
 

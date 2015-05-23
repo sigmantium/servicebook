@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Contact;
+use App\Http\Requests\Contacts\CreateContactRequest;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -8,13 +11,25 @@ use Illuminate\Http\Request;
 class ContactsController extends Controller {
 
 	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
+
+	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
+		$contacts = Contact::All();
+		return view('contacts.index')->with('contacts', $contacts);
 	}
 
 	/**
@@ -24,7 +39,7 @@ class ContactsController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('contacts.create');
 	}
 
 	/**
@@ -32,7 +47,7 @@ class ContactsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateContactRequest $request)
 	{
 		//
 	}
@@ -45,7 +60,7 @@ class ContactsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		dd($id);
 	}
 
 	/**

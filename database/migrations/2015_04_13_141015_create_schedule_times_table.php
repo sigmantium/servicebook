@@ -15,7 +15,7 @@ class CreateScheduleTimesTable extends Migration {
 		Schema::create('scheduleTimes', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('schedule');
+			$table->integer('schedule');
 			$table->timestamps();
 			$table->integer('createdBy')->nullable()->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');

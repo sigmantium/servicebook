@@ -2,10 +2,27 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Company;
+use App\Http\Requests\Companies\CreateCompanyRequest;
+use App\Http\Requests\Companies\UpdateCompanyRequest;
+
+use Auth;
 
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller {
+
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +31,9 @@ class CompaniesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$companies = Company::All();
+
+		return view('companies.index')->with('companies', $companies);
 	}
 
 	/**
@@ -24,7 +43,8 @@ class CompaniesController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		flash()->info('Companies are disabled by default. You need to edit the company and then enable.');
+		return view('companies.create');
 	}
 
 	/**
@@ -32,9 +52,15 @@ class CompaniesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateCompanyRequest $request)
 	{
-		//
+		$company = new Company($request->all());
+		$company->createdBy = Auth::user()->id;
+		$company->modifiedBy = Auth::user()->id;
+		$company->save();
+
+		return Redirect::route('companies.edit', ['id' => $company->id]);
+
 	}
 
 	/**
@@ -45,7 +71,8 @@ class CompaniesController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$company = Company::findorfail($id);
+		return view('companies/show')->with('company', $company);
 	}
 
 	/**
@@ -56,7 +83,8 @@ class CompaniesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$company = Company::findOrFail($id);
+		return view('companies/edit')->with('company', $company);
 	}
 
 	/**
@@ -65,9 +93,13 @@ class CompaniesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, UpdateCompanyRequest $request)
 	{
-		//
+		$company = Company::findOrFail($id);
+		$request->modifiedBy = Auth::user()->id;
+		$company->update($request->all());
+
+		return redirect('companies');
 	}
 
 	/**
