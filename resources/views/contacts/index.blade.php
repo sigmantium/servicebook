@@ -26,7 +26,7 @@
                             @foreach ($contacts as $contact)
                                 <tr @if ($contact->enabled == true) class="success" @else class="danger" @endif>
                                     <th><span class="glyphicon glyphicon-pencil" onclick="location='/contacts/{{$contact->id}}/edit'"></span></th>
-                                    <td>{{$contact->nameLink}}</td>
+                                    <td>{!!$contact->getNameLink()!!}</td>
                                     <td>{{$contact->company->name}}</td>
                                     <td>{{$contact->department->name}}</td>
                                     <td>{{$contact->phone}}</td>
@@ -36,7 +36,7 @@
                                     <td>@if ($contact->enabled == 1) Yes @else No @endif</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7">Notes: {{$contact->notes}}</td>
+                                    <td colspan="9">Notes: {{$contact->notes}}</td>
                                 </tr>
                             @endforeach
                         </table>

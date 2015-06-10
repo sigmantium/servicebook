@@ -79,7 +79,7 @@ jQuery(document).ready(function($) {
     var departmentEngine = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {   url: '/search/department?company=%QUERY%',
+        remote: {   url: '/search/department?company='+$("#companyId").val+'&department=%QUERY%',
             wildcard: '%QUERY%'
         }
     });

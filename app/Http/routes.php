@@ -86,4 +86,9 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+/*Search Routes*/
 route::get('/search/company', 'SearchController@companyQuery');
+route::get('/search/department', 'SearchController@departmentQuery');
+route::get('/search/vehicleMake', 'SearchController@vehicleMakeQuery');
+route::get('/search/vehicleModel', 'SearchController@vehicleModelQuery');
+route::get('/search/contact', 'SearchController@contactQuery');

@@ -5,8 +5,11 @@ use App\Http\Requests\Contacts\CreateContactRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
-use Illuminate\Http\Request;
+use Request;
+use Auth;
+
 
 class ContactsController extends Controller {
 
@@ -24,7 +27,7 @@ class ContactsController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return Response
+	 * @return contact.index.blade.php view with contacts.
 	 */
 	public function index()
 	{
@@ -47,9 +50,15 @@ class ContactsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CreateContactRequest $request)
+	public function store()
 	{
-		//
+		$contact = new Contact(Request::Except('companyName'));
+		$contact->createdBy = Auth::user()->id;
+		$contact->modifiedBy = Auth::user()->id;
+		$contact->enabled = true;
+		$contact->save();
+
+		return Redirect::route('contacts.edit', ['id' => $contact->id]);
 	}
 
 	/**

@@ -23,7 +23,7 @@ class Department extends Model {
 
     public function contacts()
     {
-        return $this->hasmany('App\Contact');
+        return $this->hasMany('App\Contact', 'departmentId', 'id');
     }
 
     public function primaryContact()

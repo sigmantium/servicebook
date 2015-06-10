@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Html;
 class Contact extends Model {
 
     protected $table = 'contacts';
@@ -17,8 +18,19 @@ class Contact extends Model {
         'enabled'
     ];
 
-    public function nameLink()
+    public function getNameLink()
     {
-        return HTML::linkAction('contactsController@show', $this->name, $this->id);
+        return link_to_action('ContactsController@show', $this->name, ['id' => $this->id]);
+    }
+
+
+    public function company()
+    {
+        return $this->belongsTo('App\Company', 'companyId');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department', 'departmentId');
     }
 }

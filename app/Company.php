@@ -12,4 +12,10 @@ class Company extends Model {
         'enabled'
     ];
 
+
+
+    public function contacts()
+    {
+        return $this->hasMany('App\Contact', 'companyId', 'id');
+    }
 }

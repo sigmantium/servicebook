@@ -29,8 +29,8 @@ class ChangeNameColumnsOnContactTable extends Migration {
 		Schema::table('contacts', function(Blueprint $table)
 		{
 
-			$table->string('firstName');
-			$table->string('lastName');
+			$table->string('firstName')->nullable();
+			$table->string('lastName')->nullable();
 			$table->dropColumn('name');
 		});
 	}
