@@ -8,7 +8,7 @@
                     <div class="panel-heading">New Service Booking</div>
                     <div class="panel-body">
                         {!! Form::open(['url' => 'services']) !!}
-                        @include('services.partials.serviceForm', ['submitButtonText' => 'Create Booking'])
+                        @include('services.partials.bookingForm', ['submitButtonText' => 'Create Booking'])
                         {!! Form::close() !!}
                     </div>
                 </div>

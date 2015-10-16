@@ -16,7 +16,8 @@ elixir(function(mix) {
 
     mix.styles([
         'libs/morris.css',
-        'libs/jquery-ui.css'
+        'libs/jquery-ui.css',
+        'libs/bootstrap-timepicker.min.css'
     ]);
 
     mix.scripts([

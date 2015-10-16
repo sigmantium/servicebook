@@ -12,6 +12,7 @@
 	<script src="{{ asset('js/raphael-min.js') }}"></script>
 	<script src="{{ asset('js/morris.min.js') }}"></script>
 	<script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
+	<script src="{{ asset('js/bootstrap-timepicker.js') }}"></script>
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>

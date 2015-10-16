@@ -10,7 +10,8 @@
 		"twbs/bootstrap": "~3.3",
 	  	"laracasts/flash": "~1.3",
 		"twitter/typeahead.js": "0.11.*",
-		"doctrine/dbal": "~2.5"
+		"doctrine/dbal": "~2.5",
+		"jdewit/bootstrap-timepicker": "^0.2.3"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
