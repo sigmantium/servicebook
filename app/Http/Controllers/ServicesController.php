@@ -4,11 +4,12 @@ use App\Http\Requests;
 use App\Http\Requests\Service\ServiceStatusRequest;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
 use App\VehicleMake;
 use App\VehicleModel;
 use App\ServiceStatus;
+use App\Service;
 
+use Request;
 use Auth;
 
 class ServicesController extends Controller {
@@ -41,8 +42,9 @@ class ServicesController extends Controller {
 	 */
 	public function create()
 	{
-		$makes = VehicleMake::orderBy('name')->lists('name', 'id');
-		return view('services.create')->with('makes', $makes);
+		//$makes = VehicleMake::orderBy('name')->lists('name', 'id');
+		$statuses = ServiceStatus::orderBy('status', 'asc')->lists('status');
+		return view('services.create')->with('statuses', $statuses);
 	}
 
 	/**
@@ -52,7 +54,12 @@ class ServicesController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$service = new Service(Request::Except('companyName'));
+		$service->createdBy = Auth::user()->id;
+		$service->modifiedBy = Auth::user()->id;
+		$service->save();
+
+		return Redirect::route('services.edit', ['id' => $service->id]);
 	}
 
 	/**

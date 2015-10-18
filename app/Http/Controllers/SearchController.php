@@ -36,11 +36,13 @@ class SearchController extends Controller {
 	{
 		$query = Input::get('department');
 		$company = Input::get('company');
-		$res = Department::with(['company' => function($query)
+		if ($company) {
+			$res = Department::where('companyId', '=', $company)->where('name', 'LIKE', "%$query%")->get();
+		}
+		else
 		{
-			$query->where('id', '=', '$company');
-
-		}])->where('name', 'LIKE', "%$query%")->get();
+			$res = Department::where('name', 'LIKE', "%$query%")->get();
+		}
 		return Response::json($res);
 	}
 

@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-lg-4 col-md-4">
     <div class="form-group">
         {!! Form::Label('rego', 'Rego:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
@@ -45,8 +45,14 @@
             {!! Form::Text('vin', null, ['class' => 'form-control']) !!}
         </div>
     </div>
+    <div class="form-group">
+        {!! Form::Label('speedo', 'KM:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Text('speedo', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
 </div>
-<div class="col-md-6">
+<div class="col-lg-4 col-md-4">
     <div class="form-group">
         {!! Form::Label('company', 'Company:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
@@ -98,6 +104,56 @@
             {!! Form::Text('fleet', null, ['class' => 'form-control']) !!}
         </div>
     </div>
+    <div class="form-group">
+        {!! Form::Label('orderNumber', 'Order Number:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Text('orderNumber', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-md-4">
+    <div class="form-group">
+        {!! Form::Label('status', 'Status:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Select('status', $statuses, 'Booking', ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('priority', 'Priority:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Select('priority', ['low','normal','high'], 'normal', ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('date', 'Date:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Text('date', null, ['class' => 'form-control datepicker','placeholder' => 'Pick the date of the booking']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('due', 'Due:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Text('due', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('method', 'Method:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Select('method', ['pickup','dropoff','onsite'], 'dropoff', ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('type', 'Type:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Select('type', ['service','repair','both'], 'service', ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('disposal', 'Disposal:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::CheckBox('disposal', null, false, ['class' => 'form-control']) !!}
+        </div>
+    </div>
 </div>
 <div class="col-lg-12 col-md-12">
     <hr>
@@ -113,6 +169,12 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+        $('#date').datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+    } );
     jQuery(document).ready(function($) {
         var companyEngine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace('name'),

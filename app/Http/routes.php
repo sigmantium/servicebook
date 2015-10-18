@@ -33,7 +33,6 @@ Route::resource('companies', 'CompaniesController');
 /*Contact Routes*/
 Route::resource('contacts', 'ContactsController');
 
-
 /*Warehouse Routes*/
 Route::resource('warehouses', 'WarehousesController');
 

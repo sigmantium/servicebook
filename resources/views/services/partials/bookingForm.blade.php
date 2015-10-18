@@ -53,6 +53,12 @@
 
         </div>
     </div>
+    <div class="form-group">
+        {!! Form::Label('type', 'Type:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Select('type', ['Service','Repair','Both'], 'Service', ['class' => 'form-control']) !!}
+        </div>
+    </div>
 </div>
 <div class="col-md-6">
     <div class="form-group">
@@ -133,8 +139,18 @@
         var departmentEngine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {   url: '/search/department?company='+$("#companyId").val()+'&department=%QUERY%',
-                wildcard: '%QUERY%'
+            remote: {   url: '/search/department?department=%QUERY%',
+                        wildcard: '%QUERY%',
+                        replace: function () {
+                                var q = '/search/department';
+                                if ($("#companyId").val()) {
+                                    q += '?company='+$("#companyId").val()+'&department='+$("#departmentName").val();
+                                }
+                                else{
+                                    q += '?department='+$("#departmentName").val();
+                                }
+                                return q;
+                                }
             }
         });
         var makeEngine = new Bloodhound({
@@ -154,7 +170,7 @@
         var contactEngine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {   url: '/search/contact?company='+$("#companyId").val()+'&contact=%QUERY%',
+            remote: {   url: '/search/contact?contact=%QUERY%',
                 wildcard: '%QUERY%'
             }
         });
@@ -220,24 +236,24 @@
             templates: {empty: ['<div class="empty-message">Unable to find any</div>']}
         });
         $("#companyName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum.id);
-            $("#companyId").val(datum.id);
+            console.log(datum['id']);
+            $("#companyId").val(datum['id']);
         });
         $("#departmentName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum.id);
-            $("#departmentId").val(datum.id);
+            console.log(datum);
+            $("#departmentId").val(datum['id']);
         });
         $("#vehicleMakeName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum.id);
-            $("#makeId").val(datum.id);
+            console.log(datum);
+            $("#makeId").val(datum['id']);
         });
         $("#vehicleModelName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum.id);
-            $("#modelId").val(datum.id);
+            console.log(datum);
+            $("#modelId").val(datum['id']);
         });
         $("#contactName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum.id);
-            $("#contactId").val(datum.id);
+            console.log(datum);
+            $("#contactId").val(datum['id']);
         });
     });
 </script>

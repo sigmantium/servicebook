@@ -15,14 +15,15 @@ class CreateServicesTable extends Migration {
 		Schema::create('services', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->enum('priority', ['low','normal','high']);
-			$table->enum('type', ['service','repair','both']);
-			$table->enum('method', ['pickup','dropoff','onsite']);
+			$table->text('priority');
+			$table->text('type');
+			$table->text('method');
 			$table->boolean('disposal');
 			$table->date('date');
 			$table->timestamps();
 
 			//nullables
+			$table->time('available')->nullable();
 			$table->time('due')->nullable();
 			$table->text('serviceNotes')->nullable();
 			$table->text('invoiceNotes')->nullable();
