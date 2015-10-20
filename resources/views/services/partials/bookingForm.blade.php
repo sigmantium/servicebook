@@ -125,35 +125,15 @@
         <div class="form-group input-group-md">{!! Form::submit($submitButtonText,['class' => 'btn btn-primary form-control']) !!}</div>
     </div>
 </div>
+@include('partials.search.company', ['companyNameField'=>'companyName','companyIdField' => 'companyId'])
+@include('partials.search.contact', ['contactNameField'=>'contactName','contactIdField' => 'contactId', 'returnContactPhoneField' => 'phone', 'returnContactEmailField' => 'email'])
+@include('partials.search.department', ['companyIdField' => 'companyId', 'departmentNameField' => 'departmentName', 'departmentIdField' => 'departmentId'])
 <script>
     $('#due').timepicker();
     $('#available').timepicker();
     jQuery(document).ready(function($) {
-        var companyEngine = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {   url: '/search/company?company=%QUERY%',
-                wildcard: '%QUERY%'
-            }
-        });
-        var departmentEngine = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {   url: '/search/department?department=%QUERY%',
-                        wildcard: '%QUERY%',
-                        replace: function () {
-                                var q = '/search/department';
-                                if ($("#companyId").val()) {
-                                    q += '?company='+$("#companyId").val()+'&department='+$("#departmentName").val();
-                                }
-                                else{
-                                    q += '?department='+$("#departmentName").val();
-                                }
-                                return q;
-                                }
-            }
-        });
-        var makeEngine = new Bloodhound({
+
+            var makeEngine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {   url: '/search/vehicleMake?make=%QUERY%',
@@ -163,21 +143,21 @@
         var modelEngine = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {   url: '/search/vehicleModel?make='+$("#makeId").val()+'&model=%QUERY%',
-                wildcard: '%QUERY%'
-            }
-        });
-        var contactEngine = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {   url: '/search/contact?contact=%QUERY%',
-                wildcard: '%QUERY%'
+            remote: {   url: '/search/vehicleModel?model=%QUERY%',
+                wildcard: '%QUERY%',
+                replace: function () {
+                    var q = '/search/vehicleModel';
+                    if ($("#companyId").val()) {
+                        q += '?make='+$("#makeId").val()+'&model='+$("#vehicleModelName").val();
+                    }
+                    else{
+                        q += '?model='+$("#vehicleModelName").val();
+                    }
+                    return q;
+                }
             }
         });
 
-
-        companyEngine.initialize();
-        departmentEngine.initialize();
         modelEngine.initialize();
         makeEngine.initialize();
         $("#vehicleModelName").typeahead({
@@ -191,28 +171,7 @@
             valueKey: 'id',
             templates: {empty: ['<div class="empty-message">Unable to find any</div>']}
         });
-        $("#departmentName").typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 2
-        }, {
-            source: departmentEngine.ttAdapter(),
-            name: 'Department_list',
-            displayKey: 'name',
-            valueKey: 'id',
-            templates: {empty: ['<div class="empty-message">Unable to find any</div>']}
-        });
-        $("#companyName").typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 2
-        }, {
-            source: companyEngine.ttAdapter(),
-            name: 'Company_list',
-            displayKey: 'name',
-            valueKey: 'id',
-            templates: {empty: ['<div class="empty-message">Unable to find any</div>']}
-        });
+
         $("#vehicleMakeName").typeahead({
             hint: true,
             highlight: true,
@@ -224,36 +183,15 @@
             valueKey: 'id',
             templates: {empty: ['<div class="empty-message">Unable to find any</div>']}
         });
-        $("#contactName").typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 2
-        }, {
-            source: contactEngine.ttAdapter(),
-            name: 'contact_list',
-            displayKey: 'name',
-            valueKey: 'id',
-            templates: {empty: ['<div class="empty-message">Unable to find any</div>']}
-        });
-        $("#companyName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum['id']);
-            $("#companyId").val(datum['id']);
-        });
-        $("#departmentName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum);
-            $("#departmentId").val(datum['id']);
-        });
+
         $("#vehicleMakeName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
             console.log(datum);
             $("#makeId").val(datum['id']);
         });
+
         $("#vehicleModelName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
             console.log(datum);
             $("#modelId").val(datum['id']);
-        });
-        $("#contactName").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
-            console.log(datum);
-            $("#contactId").val(datum['id']);
         });
     });
 </script>
