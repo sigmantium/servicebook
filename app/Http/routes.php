@@ -31,6 +31,7 @@ Route::resource('users', 'UsersController');
 Route::resource('companies', 'CompaniesController');
 
 /*Contact Routes*/
+Route::get('contacts/newPartial', 'ContactsController@createPartial');
 Route::resource('contacts', 'ContactsController');
 
 /*Warehouse Routes*/

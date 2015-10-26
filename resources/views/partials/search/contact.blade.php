@@ -19,7 +19,7 @@
                 name: 'contact_list',
                 displayKey: 'name',
                 valueKey: 'id',
-                templates: {empty: ['<div class="empty-message">No Contact Found... <button type="button" class="btn btn-primary" name="newContactButton" id="newContactButton">New</button></div>']}
+                templates: {empty: ['<div class="empty-message">No Contact Found... <button type="button" class="btn btn-primary" onclick="showContactModal();return false;">New</button></div>']}
             });
 
             $("#{!!$contactNameField!!}").on("typeahead:selected typeahead:autocompleted typeahead:close", function(e,datum) {
@@ -34,12 +34,12 @@
             });
         });
 
-        $('#newContactButton button').on("click", function ()
+        function showContactModal()
         {
-            $('#modalCreateContact').load('../contacts/partials/contactForm.blade.php')//load a view into a modal
+            $('#modalCreateContact').load('../contacts/newPartial');//load a view into a modal
             $('#contactModal').modal('show'); //show the modal
 
-        });
+        };
     </script>
 
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="contactModal" style="top:2%">
@@ -50,8 +50,7 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">Create New Contact</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="modalCreateContact">
-                    </div>
+                    <iframe id="contactModalContent" style="border:0px;width:100%"></iframe>
                 </div>
             </div>
         </div>

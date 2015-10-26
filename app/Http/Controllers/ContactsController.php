@@ -45,6 +45,11 @@ class ContactsController extends Controller {
 		return view('contacts.create');
 	}
 
+	public function createPartial()
+	{
+		return view('contacts.partials.contactForm', ['submitButtonText' => 'Create Contact']);
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *
