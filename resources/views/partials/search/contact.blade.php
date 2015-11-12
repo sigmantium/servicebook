@@ -36,21 +36,23 @@
 
         function showContactModal()
         {
-            $('#modalCreateContact').load('../contacts/newPartial');//load a view into a modal
-            $('#contactModal').modal('show'); //show the modal
+            window.open('../contacts/create');
+            //$('#contactModalContent').attr('src', '../contacts/newPartial');//load a view into a modal
+            //$('#contactModal').modal('show'); //show the modal
+            return false;
 
         };
     </script>
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="contactModal" style="top:2%">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="contactModal" style="top:2%">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="gridSystemModalLabel">Create New Contact</h4>
                 </div>
                 <div class="modal-body">
-                    <iframe id="contactModalContent" style="border:0px;width:100%"></iframe>
+                    <iframe id="contactModalContent" src="" style="frameborder:0; width:100%;"></iframe>
                 </div>
             </div>
         </div>

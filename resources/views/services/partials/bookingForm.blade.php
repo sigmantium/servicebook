@@ -54,9 +54,15 @@
         </div>
     </div>
     <div class="form-group">
-        {!! Form::Label('type', 'Type:', ['class' => 'col-sm-2 control-label']) !!}
+        {!! Form::Label('priority', 'Priority:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::Select('type', ['Service','Repair','Both'], 'Service', ['class' => 'form-control']) !!}
+            {!! Form::Select('priority', ['Low','Medium','High','Urgent'], 'Low', ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('disposal', 'Disposal:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::CheckBox('disposal', '',0, ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
@@ -110,6 +116,12 @@
         {!! Form::Label('fleet', 'Fleet:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
             {!! Form::Text('fleet', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::Label('type', 'Type:', ['class' => 'col-sm-2 control-label']) !!}
+        <div class="col-sm-10">
+            {!! Form::Select('type', ['Service','Repair','Both'], 'Service', ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
