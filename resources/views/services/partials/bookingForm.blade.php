@@ -30,7 +30,7 @@
     <div class="form-group">
         {!! Form::Label('method', 'Method:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::Select('method', array('Drop-Off', 'Pick-Up', 'Onsite'), 'Drop-Off', ['class' => 'form-control']) !!}
+            {!! Form::Select('method', array('Drop-Off'=>'Drop-Off', 'Pick-Up'=>'Pick-Up', 'Onsite'=>'Onsite'), 'Drop-Off', ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
@@ -56,13 +56,13 @@
     <div class="form-group">
         {!! Form::Label('priority', 'Priority:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::Select('priority', ['Low','Medium','High','Urgent'], 'Low', ['class' => 'form-control']) !!}
+            {!! Form::Select('priority', ['Low'=>'Low','Medium'=>'Medium','High'=>'High','Urgent'=>'Urgent'], 'Low', ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::Label('disposal', 'Disposal:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::CheckBox('disposal', '',0, ['class' => 'form-control']) !!}
+            {!! Form::CheckBox('disposal','1',0, ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
@@ -121,7 +121,7 @@
     <div class="form-group">
         {!! Form::Label('type', 'Type:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            {!! Form::Select('type', ['Service','Repair','Both'], 'Service', ['class' => 'form-control']) !!}
+            {!! Form::Select('type', ['Service'=>'Service','Repair'=>'Repair','Both'=>'Both'], 'Service', ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
@@ -137,6 +137,7 @@
         <div class="form-group input-group-md">{!! Form::submit($submitButtonText,['class' => 'btn btn-primary form-control']) !!}</div>
     </div>
 </div>
+{!! Form::Hidden('_token',  csrf_token() ) !!}
 @include('partials.search.company', ['companyNameField'=>'companyName','companyIdField' => 'companyId'])
 @include('partials.search.contact', ['contactNameField'=>'contactName','contactIdField' => 'contactId', 'returnContactPhoneField' => 'phone', 'returnContactEmailField' => 'email'])
 @include('partials.search.department', ['companyIdField' => 'companyId', 'departmentNameField' => 'departmentName', 'departmentIdField' => 'departmentId'])

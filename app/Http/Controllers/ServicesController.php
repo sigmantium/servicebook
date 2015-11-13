@@ -55,6 +55,9 @@ class ServicesController extends Controller {
 	public function store()
 	{
 		$service = new Service(Request::Except('companyName'));
+		if($service.disposal.isNull ){
+			$service->disposal = '0';
+		}
 		$service->createdBy = Auth::user()->id;
 		$service->modifiedBy = Auth::user()->id;
 		$service->save();
