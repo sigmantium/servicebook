@@ -22,6 +22,7 @@ Route::get('services/serviceStatuses', 'ServicesController@serviceStatuses');
 Route::get('services/createServiceStatuses', 'ServicesController@createServiceStatus');
 Route::post('services/serviceStatuses', 'ServicesController@storeServiceStatus');
 Route::resource('services', 'ServicesController');
+Route::get('services/{id}','ServicesController@edit');
 
 
 /*Users Routes*/

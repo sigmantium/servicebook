@@ -19,6 +19,9 @@ class CreateServiceStatusesTable extends Migration {
 			$table->string('status');
 			$table->timestamps();
 
+			//foreign keys
+			$table->integer('createdBy')->unsigned()->default('1');
+			$table->foreign('createdBy')->references('id')->on('users');
 		});
 	}
 

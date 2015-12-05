@@ -33,9 +33,9 @@ class CreateDepartmentsTable extends Migration {
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();
 			$table->foreign('modifiedBy')->references('id')->on('users');
-			$table->integer('primaryContact')->unsigned();
+			$table->integer('primaryContact')->unsigned()->nullable();;
 			$table->foreign('primaryContact')->references('id')->on('contacts');
-			$table->integer('accountsContact')->unsigned();
+			$table->integer('accountsContact')->unsigned()->nullable();;
 			$table->foreign('accountsContact')->references('id')->on('contacts');
 			$table->integer('companyId')->nullable()->unsigned();
 			$table->foreign('companyId')->references('id')->on('companies');

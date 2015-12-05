@@ -2,15 +2,13 @@
 
 use App\Http\Requests;
 use App\Http\Requests\Service\ServiceStatusRequest;
-use App\Http\Controllers\Controller;
 
-use App\VehicleMake;
-use App\VehicleModel;
 use App\ServiceStatus;
 use App\Service;
 
 use Request;
 use Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ServicesController extends Controller {
 
@@ -32,7 +30,8 @@ class ServicesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$services = Service::where('status','!=','Finished')->orderBy('status','id')->get();
+		return view('services/index')->with('services', $services);
 	}
 
 	/**
@@ -42,9 +41,7 @@ class ServicesController extends Controller {
 	 */
 	public function create()
 	{
-		//$makes = VehicleMake::orderBy('name')->lists('name', 'id');
-		$statuses = ServiceStatus::orderBy('status', 'asc')->lists('status');
-		return view('services.create')->with('statuses', $statuses);
+		return view('services.create');
 	}
 
 	/**
@@ -55,9 +52,7 @@ class ServicesController extends Controller {
 	public function store()
 	{
 		$service = new Service(Request::Except('companyName'));
-		if($service.disposal.isNull ){
-			$service->disposal = '0';
-		}
+		$service->status = 'Booking';
 		$service->createdBy = Auth::user()->id;
 		$service->modifiedBy = Auth::user()->id;
 		$service->save();
@@ -73,7 +68,8 @@ class ServicesController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$service = Service::findOrFail($id);
+		return view('services/edit')->with('service', $service);
 	}
 
 	/**
@@ -84,7 +80,8 @@ class ServicesController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$service = Service::findOrFail($id);
+		return view('services/edit')->with('service', $service);
 	}
 
 	/**
@@ -95,7 +92,12 @@ class ServicesController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$request = Request::All();
+		$service = Service::findOrFail($id);
+		$service->modifiedBy = Auth::user()->id;
+		$service->update($request);
+
+		return Redirect::route('services.edit', ['id' => $service->id]);
 	}
 
 	/**

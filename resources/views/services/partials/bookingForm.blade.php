@@ -9,7 +9,7 @@
         {!! Form::Label('make', 'Make:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
             @if(isset($service))
-                {!! Form::Text('vehicleMakeName', $service->vehicleMake->name, ['id' => 'vehicleMakeName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Make']) !!}
+                {!! Form::Text('vehicleMakeName', null, ['id' => 'vehicleMakeName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Make']) !!}
             @else
                 {!! Form::Text('vehicleMakeName', null, ['id' => 'vehicleMakeName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Make']) !!}
             @endif
@@ -19,11 +19,7 @@
     <div class="form-group">
         {!! Form::Label('model', 'Model:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            @if(isset($service))
-                {!! Form::Text('vehicleModelName', $service->vehicleModel->name, ['id' => 'vehicleModelName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Model']) !!}
-            @else
-                {!! Form::Text('vehicleModelName', null, ['id' => 'vehicleModelName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Model']) !!}
-            @endif
+            {!! Form::Text('model', null, ['id' => 'vehicleModelName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Model']) !!}
             {!! Form::Hidden('modelId', null, ['id' => 'modelId']) !!}
         </div>
     </div>
@@ -70,33 +66,21 @@
     <div class="form-group">
         {!! Form::Label('company', 'Company:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            @if(isset($service))
-                {!! Form::Text('companyName', $service->company->name, ['id' => 'companyName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Parent Company Name']) !!}
-            @else
-                {!! Form::Text('companyName', null, ['id' => 'companyName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Parent Company Name']) !!}
-            @endif
+            {!! Form::Text('companyName', null, ['id' => 'companyName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Parent Company Name']) !!}
             {!! Form::Hidden('companyId', null, ['id' => 'companyId']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::Label('department', 'Department:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            @if(isset($service))
-                {!! Form::Text('departmentName', $service->department->name, ['id' => 'companyName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Department Name']) !!}
-            @else
-                {!! Form::Text('departmentName', null, ['id' => 'departmentName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Department Name']) !!}
-            @endif
+            {!! Form::Text('departmentName', null, ['id' => 'departmentName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Department Name']) !!}
             {!! Form::Hidden('departmentId', null, ['id' => 'departmentId']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::Label('contact', 'Contact:', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-10">
-            @if(isset($service))
-                {!! Form::Text('contactName', $service->contact->name, ['id' => 'contactName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Contact Name']) !!}
-            @else
-                {!! Form::Text('contactName', null, ['id' => 'contactName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Contact Name']) !!}
-            @endif
+            {!! Form::Text('contactName', null, ['id' => 'contactName', 'class' => 'form-control typeahead tt-input', 'type' => 'text', 'placeholder'=>'Contact Name']) !!}
             {!! Form::Hidden('contactId', null, ['id' => 'contactId']) !!}
         </div>
     </div>

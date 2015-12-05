@@ -13,7 +13,7 @@
 		<div class="col-lg-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Todays Bookings</h3>
+					<h3 class="panel-title">@if ($date == date('d-m-Y'))Today @else {!! $date !!}@endif Bookings</h3>
 				</div>
 				<div class="panel-body">
 					<div class="table-responsive"><!-- Todays Bookings -->
@@ -27,59 +27,27 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>1BAN 561</td>
-								<td>Honda</td>
-								<td>Accord</td>
-								<td>Michael</td>
-							</tr>
-							<tr>
-								<td>1CDS 123</td>
-								<td>Holden</td>
-								<td>Commodore</td>
-								<td>Peter Garret</td>
-							</tr>
-							<tr>
-								<td>3324</td>
-								<td>10/21/2013</td>
-								<td>3:03 PM</td>
-								<td>$724.17</td>
-							</tr>
-							<tr>
-								<td>3323</td>
-								<td>10/21/2013</td>
-								<td>3:00 PM</td>
-								<td>$23.71</td>
-							</tr>
-							<tr>
-								<td>3322</td>
-								<td>10/21/2013</td>
-								<td>2:49 PM</td>
-								<td>$8345.23</td>
-							</tr>
-							<tr>
-								<td>3321</td>
-								<td>10/21/2013</td>
-								<td>2:23 PM</td>
-								<td>$245.12</td>
-							</tr>
-							<tr>
-								<td>3320</td>
-								<td>10/21/2013</td>
-								<td>2:15 PM</td>
-								<td>$5663.54</td>
-							</tr>
-							<tr>
-								<td>3319</td>
-								<td>10/21/2013</td>
-								<td>2:13 PM</td>
-								<td>$943.45</td>
-							</tr>
+							@foreach ( $bookings as $booking)
+								<tr onclick="window.location.href='services/{!!$booking->id!!}/edit'">
+									<td>{!!$booking->rego!!}</td>
+									<td>{!!$booking->make->name!!}</td>
+									<td>{!!$booking->model->name!!}</td>
+									<td>{!!$booking->contact->name!!}</td>
+								</tr>
+								<tr onclick="window.location.href='services/{!!$booking->id!!}/edit'">
+									<td colspan="4">{!!$booking->serviceNotes!!}</td>
+								</td>
+							@endforeach
 							</tbody>
 						</table>
 					</div>
+					<div class="btn-group btn-group-xs" role="group" aria-label="Day Select">
+						<button type="button" class="btn btn-default" onclick="window.location.href='/?booking_date={!! Carbon\Carbon::createFromFormat('d-m-Y', $date)->subDays(1)->format('d-m-Y')!!}'"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+						<button type="button" class="btn btn-default" onclick="window.location.href='/?booking_date={!! date('d-m-Y')!!}'">Today</button>
+						<button type="button" class="btn btn-default" onclick="window.location.href='/?booking_date={!! Carbon\Carbon::createFromFormat('d-m-Y', $date)->addDays(1)->format('d-m-Y')!!}'"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+					</div>
 					<div class="text-right">
-						<a href="#">View All Bookings</a>
+						<a href="/services">View All Bookings</a>
 					</div>
 				</div>
 			</div>
@@ -153,9 +121,9 @@
 			// Chart data records -- each entry in this array corresponds to a point on
 			// the chart.
 			data: [
-				{ label: 'Services', value: 20 },
-				{ label: 'Repairs', value: 10 },
-				{ label: 'Disposals', value: 5 }
+				{ label: 'Services', value: {!! $count_list[0]->Services_Count + $count_list[0]->Both_Count !!} },
+				{ label: 'Repairs', value: {!!   $count_list[0]->Repairs_Count + $count_list[0]->Both_Count !!} },
+				{ label: 'Disposals', value: {!! $count_list[0]->Disposal_Count !!} }
 			],
 			colors: [ "#3333D6", "#4DFF4D","#FF5050"]
 

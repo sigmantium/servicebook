@@ -11,6 +11,7 @@ class Service extends Model {
         'method',
         'date',
         'due',
+        'available',
         'serviceNotes',
         'invoiceNotes',
         'orderNumber',
@@ -21,7 +22,41 @@ class Service extends Model {
         'fleetId',
         'companyId',
         'departmentId',
-        'disposal'
+        'disposal',
+        'rego',
+        'makeId',
+        'modelId',
+        'year',
+        'vin',
+        'body',
+        'series',
+        'transmission',
+        'assetNumber',
+        'notes'
     ];
 
+    public function make()
+    {
+        return $this->belongsTo('App\VehicleMake', 'makeId', 'id');
+    }
+
+    public function model()
+    {
+        return $this->belongsTo('App\VehicleModel', 'modelId', 'id');
+    }
+
+    public function contact()
+    {
+        return $this->belongsTo('App\Contact', 'contactId', 'id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Company', 'companyId', 'id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department', 'departmentId', 'id');
+    }
 }

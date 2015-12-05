@@ -1,0 +1,10 @@
+Visual C++ Redist:
+http://www.microsoft.com/en-us/download/details.aspx?id=30679#
+install php
+edit php.ini - 
+-uncomment ext directory
+-uncomment include directory
+-uncomment openssl extension
+-uncomment mbstring extension
+install composer
+install node.js

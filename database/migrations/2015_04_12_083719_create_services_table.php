@@ -15,30 +15,40 @@ class CreateServicesTable extends Migration {
 		Schema::create('services', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->text('priority');
-			$table->text('type');
-			$table->text('method');
-			$table->boolean('disposal');
-			$table->date('date');
 			$table->timestamps();
+			$table->string('rego')->default('TBA');
 
 			//nullables
+			$table->text('priority')->nullable()->default('Low');
+			$table->text('type')->nullable()->default('Service');
+			$table->text('method')->nullable()->default('Drop-Off');
+			$table->boolean('disposal')->nullable()->default(0);
+			$table->date('date')->nullable();
 			$table->time('available')->nullable();
 			$table->time('due')->nullable();
 			$table->text('serviceNotes')->nullable();
 			$table->text('invoiceNotes')->nullable();
 			$table->text('orderNumber')->nullable();
+			$table->text('assetNumber')->nullable();
 			$table->string('speedo')->nullable();
+			$table->string('year')->nullable();
+			$table->string('vin')->nullable();
+			$table->string('series')->nullable();
+			$table->string('transmission')->nullable();
+			$table->string('body')->nullable();
+			$table->string('notes')->nullable();
 
 			//foreign keys
+			$table->string('makeId')->nullable();
+			$table->foreign('makeId')->references('id')->on('vehicleMakes');
+			$table->string('modelId')->nullable();
+			$table->foreign('modelId')->references('id')->on('vehicleModels');
 			$table->integer('status')->unsigned();
 			$table->foreign('status')->references('id')->on('serviceStatuses');
 			$table->integer('createdBy')->unsigned();
 			$table->foreign('createdBy')->references('id')->on('users');
 			$table->integer('modifiedBy')->unsigned();
 			$table->foreign('modifiedBy')->references('id')->on('users');
-			$table->integer('vehicleId')->unsigned();
-			$table->foreign('vehicleId')->references('id')->on('vehicles');
 			$table->integer('contactId')->unsigned();
 			$table->foreign('contactId')->references('id')->on('contacts');
 			$table->integer('fleetId')->nullable()->unsigned();

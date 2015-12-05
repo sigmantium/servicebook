@@ -3,9 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Request;
-
+use DB;
 use App\DailyNote;
 use Auth;
+use App\Service;
 
 class HomeController extends Controller {
 
@@ -37,8 +38,14 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-
-		return view('home');
+		$count_list = DB::table('services')
+			->select(DB::raw('SUM(CASE WHEN type = \'Service\' THEN 1 ELSE 0 END) as Services_Count,SUM(CASE WHEN type = \'Repair\' THEN 1 ELSE 0 END) as Repairs_Count,SUM(CASE WHEN type = \'Both\' THEN 1 ELSE 0 END) as Both_Count,SUM(Disposal) as Disposal_Count'))
+			->where('status', '=', 'Booking')
+			->get();
+		$date = Request::Input('booking_date');
+		if(!$date) { $date = date('d-m-Y');}
+		$bookings = Service::Where('date', '=', $date)->orderBy('available', 'asc')->get();
+		return view('home')->with(['bookings'=> $bookings,'date'=>$date, 'count_list'=>$count_list]);
 	}
 
 	public function storeNote()

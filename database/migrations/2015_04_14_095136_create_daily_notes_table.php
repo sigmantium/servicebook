@@ -20,6 +20,7 @@ class CreateDailyNotesTable extends Migration {
 
 			//nullables
 			$table->datetime('dueTime')->nullable();
+			$table->boolean('completed')->nullable()->default('0');
 
 			//foreign keys
 			$table->integer('createdBy')->unsigned();
