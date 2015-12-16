@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 
+use App\Inventory;
 use App\ItemType;
 use App\Http\Requests;
 use App\Http\Requests\Inventory\CreateItemType;
@@ -18,7 +19,8 @@ class InventoryController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$items = Inventory::all();
+		return view('inventory.stock.index')->with('items', $items);
 	}
 
 	/**
@@ -28,7 +30,7 @@ class InventoryController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('inventory.stock.createItem');
 	}
 
 	/**

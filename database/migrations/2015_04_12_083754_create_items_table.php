@@ -30,6 +30,7 @@ class CreateItemsTable extends Migration {
 			//nullables
 			$table->smallinteger('cost')->nullable();
 			$table->smallinteger('sell')->nullable();
+			$table->boolean('stocked')->nullable();
 		});
 	}
 

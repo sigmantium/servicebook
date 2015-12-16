@@ -25,10 +25,19 @@ class CreateStockControlTable extends Migration {
 
 
 			//nullables
-			$table->string('itemId')->nullable();
 			$table->smallInteger('cost')->nullable();
-			$table->string('serviceId')->nullable();
-			$table->string('adjustmentId')->nullable();
+			$table->string('task')->nullable();
+			$table->boolean('adjustment')->nullable();
+			$table->string('adjustmentReason')->nullable();
+
+			$table->integer('itemId')->nullable()->unsigned();
+			$table->foreign('serviceId')->references('id')->on('services');
+
+			$table->integer('serviceId')->nullable()->unsigned();
+			$table->foreign('serviceId')->references('id')->on('services');
+
+			$table->integer('customerId')->nullable()->unsigned();
+			$table->foreign('customerId')->references('id')->on('companies');
 		});
 	}
 

@@ -54,7 +54,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a tabindex="-1" href="{{action("InventoryController@itemTypes")}}">Item Types</a></li>
                                     <li><a href="{{action("WarehousesController@index")}}">Warehouses</a></li>
-                                    <li><a href="#">Stock Control</a></li>
+                                    <li><a href="{{action("InventoryController@index")}}">Inventory</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Service <i class="glyphicon glyphicon-chevron-right"></i></a>
