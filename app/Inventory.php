@@ -9,6 +9,7 @@ class Inventory extends Model {
         'description',
         'partNumber',
         'supplier',
+        'brand',
         'type',
         'cost',
         'sell',

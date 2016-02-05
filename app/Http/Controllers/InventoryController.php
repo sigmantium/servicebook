@@ -1,11 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use db;
+
 
 use App\Inventory;
 use App\ItemType;
 use App\Http\Requests;
 use App\Http\Requests\Inventory\CreateItemType;
+use App\Http\Requests\Inventory\CreateItem;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -30,7 +33,8 @@ class InventoryController extends Controller {
 	 */
 	public function create()
 	{
-		return view('inventory.stock.createItem');
+		$itemTypes = DB::table('itemTypes')->orderBy('name', 'asc')->get()->lists('name','id');
+		return view('inventory.stock.createItem')->with('itemTypes', $itemTypes);
 	}
 
 	/**
@@ -38,9 +42,13 @@ class InventoryController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateItem $request)
 	{
-		//
+		$item = new Inventory($request->all());
+		$item->createdBy = Auth::user()->id;
+		$item->save();
+
+		return redirect('inventory');
 	}
 
 	/**

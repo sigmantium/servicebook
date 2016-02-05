@@ -31,6 +31,7 @@ class CreateItemsTable extends Migration {
 			$table->smallinteger('cost')->nullable();
 			$table->smallinteger('sell')->nullable();
 			$table->boolean('stocked')->nullable();
+			$table->string('brand')->nullable();
 		});
 	}
 
